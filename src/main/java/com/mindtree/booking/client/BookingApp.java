@@ -55,11 +55,6 @@ public class BookingApp
 	private static void displayHotel(List<Room> hotelCity) {
 		// TODO Auto-generated method stub
 		System.out.println("hotelNo\t"+"roomNo\t"+"type\t"+"cost");
-	//	for(Hotel e:hotelCity) {
-	//		List<Room> room=new ArrayList<Room>();
-	//		room=e.getRoom();
-	//		System.out.print(e.getHostelId()+" \t"+
-	//	e.getName()+"\t"+e.getCity());
 			for(Room r:hotelCity) {
 				System.out.println(r.getHotel()+"\t"+r.getRoomNo()+"\t "+r.getType()+"\t"+r.getCost());
 			}
