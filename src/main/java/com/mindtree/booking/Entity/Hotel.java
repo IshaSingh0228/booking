@@ -1,7 +1,6 @@
 package com.mindtree.booking.Entity;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Hotel {
 private int hostelId;
 private String city;
