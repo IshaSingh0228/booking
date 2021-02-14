@@ -1,5 +1,4 @@
 package com.mindtree.booking.Entity;
-
 import java.util.ArrayList;
 import java.util.List;
 
