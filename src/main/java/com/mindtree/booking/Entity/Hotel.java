@@ -18,11 +18,11 @@ public Hotel(int hostelId, String city, String name,List<Room> room) {
 	this.name = name;
 	this.room=room;
 }
-//public List<Room> getRoom() {
-//	List<Room> r=new ArrayList<Room>();
-//	r=this.room;
-//	return r;
-//}
+public List<Room> getRoom() {
+	List<Room> r=new ArrayList<Room>();
+	r=this.room;
+	return r;
+}
 public void setRoom(List<Room> room) {
 	List<Room> r=new ArrayList<Room>();
 	r=room;
