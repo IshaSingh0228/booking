@@ -6,17 +6,17 @@ pipeline{
   stages{
   stage('Compile'){
   steps{
-  sh 'mvn clean compile'
+  bat 'mvn clean compile'
   } 
   }
   stage('Testing'){
   steps{
-  sh 'mvn clean test'
+  bat 'mvn clean test'
   } 
   }
   stage('Packaging'){
   steps{
-  sh 'mvn package'
+  bat 'mvn package'
   } 
  }
 }
