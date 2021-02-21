@@ -1,9 +1,11 @@
 pipeline{
-    agent any
-    tools{
-    maven "maven3"
-    jdk "jdk11"
-    }
+    agent 
+  {
+    docker{
+     image 'maven:3-alpine'
+        args '-v/.m2:/root/.m2'
+  }
+}
     stages{
         stage('mvn clean'){
             steps{
