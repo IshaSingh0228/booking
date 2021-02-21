@@ -2,20 +2,20 @@ pipeline{
     agent 
   {
     docker{
-     image 'maven:3-alpine'
+     image 'maven:3.6.3-jdk-11'
         args '-v/.m2:/root/.m2'
   }
 }
     stages{
         stage('mvn clean'){
             steps{
-                bat 'mvn compile'
+                sh 'mvn compile'
             }
         }
         stage('build and sonarqube analysis'){
             steps{
                 withSonarQubeEnv('sonar-server'){
-                bat 'mvn package sonar:sonar'
+                sh 'mvn package sonar:sonar'
                 }    
             }
         }
