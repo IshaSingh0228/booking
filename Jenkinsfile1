@@ -14,5 +14,19 @@ pipeline{
               }
             }
           }
-    }
+    
+    stage("Uploading to artifactory"){
+    rtUpload (
+    serverId: 'Artifactory-1',
+    spec: '''{
+          "files": [
+            {
+              "pattern": "target/*.jar",
+              "target": "art-doc-dev-loc/"
+            }
+         ]
+    }''',
+)
+}
+}
 }
