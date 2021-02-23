@@ -10,11 +10,16 @@ pipeline{
             steps {
               withSonarQubeEnv('sonar-server') {
                 bat 'java -version'
-                bat 'mvn clean package sonar:sonar'
+                bat 'mvn clean sonar:sonar'
               }
             }
           }
-    
+          
+          stage('package'){
+          steps{
+          bat 'mvn package'
+          }
+}    
     stage("collect artifact"){
     steps{
      archiveArtifacts artifacts:'target/*.jar', followSymlinks:false
