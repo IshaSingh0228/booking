@@ -1,1 +1,57 @@
-
+pipeline{
+   agent any
+   
+   triggers{
+        pollSCM('* * * * *')
+    }
+   
+   tools{
+       maven 'maven3'
+       jdk 'jdk11'
+   }
+  stages {
+          stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('sonar-server') {
+                bat 'java -version'
+                bat 'mvn clean test sonar:sonar'
+         
+              }
+            }
+          }
+          
+          stage('package'){
+          steps{
+          bat 'mvn package'
+          }
+}    
+    stage("collect artifact"){
+    steps{
+     archiveArtifacts artifacts:'target/*.jar', followSymlinks:false
+    }
+    }
+    stage("Quality Gate Check") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+    
+    stage("Uploading to artifactory"){
+    steps{
+    rtUpload (
+    serverId: 'ARTIFACTORY_SERVER',
+    spec: '''{
+          "files": [
+            {
+              "pattern": "target/*.jar",
+              "target": "art-doc-dev-loc"
+            }
+         ]
+    }''',
+)
+}}
+}
+}
