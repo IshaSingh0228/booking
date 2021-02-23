@@ -15,6 +15,12 @@ pipeline{
             }
           }
     
+    stage("collect artifact"){
+    steps{
+     archiveArtifacts artifacts:'target/*.jar', followSymlinks:false
+    }
+    }
+    
     stage("Uploading to artifactory"){
     steps{
     rtUpload (
