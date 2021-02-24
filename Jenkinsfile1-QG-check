@@ -73,7 +73,7 @@ script{
 last_started=env.STAGE_NAME
 }
 rtDownload (
-    serverId: 'Artifactory-1',
+    serverId: 'Artifactory-SERVER',
     spec: '''{
           "files": [
             {
