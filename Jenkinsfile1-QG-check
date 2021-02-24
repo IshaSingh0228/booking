@@ -66,6 +66,27 @@ pipeline{
     }''',
 )
 }}
+
+stage("Downloading from artifactory"){
+steps{
+script{
+last_started=env.STAGE_NAME
+}
+rtDownload (
+    serverId: 'Artifactory-1',
+    spec: '''{
+          "files": [
+            {
+              "pattern": "art-doc-dev-loc/",
+              "target": "war_package_download/"
+            }
+          ]
+    }''',
+
+}
+}
+}
+
 }
 post{
 failure {  
