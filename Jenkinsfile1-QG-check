@@ -33,6 +33,9 @@ pipeline{
     }
     stage("Quality Gate Check") {
             steps {
+            script{
+            last_started=env.STAGE_NAME
+            }
               timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
                 
@@ -57,7 +60,7 @@ pipeline{
 }
 post{
 failure {  
-             mail bcc: '', body: "<b>Failure</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Stage Name: ${env.STAGE_NAME} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "thesinghanias@gmail.com";  
+             mail bcc: '', body: "<b>Failure</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Stage Name: $last_started <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "thesinghanias@gmail.com";  
          }  
   
 }
