@@ -13,6 +13,9 @@ pipeline{
           stage("build & SonarQube analysis") {
             agent any
             steps {
+            script{
+            last_started=env.STAGE_NAME
+            }
               withSonarQubeEnv('sonar-server') {
                 bat 'java -version'
                 bat 'mvn clean test sonar:sonar'
@@ -28,6 +31,9 @@ pipeline{
 }    
     stage("collect artifact"){
     steps{
+    script{
+            last_started=env.STAGE_NAME
+            }
      archiveArtifacts artifacts:'target/*.jar', followSymlinks:false
     }
     }
@@ -45,6 +51,9 @@ pipeline{
     
     stage("Uploading to artifactory"){
     steps{
+    script{
+            last_started=env.STAGE_NAME
+            }
     rtUpload (
     serverId: 'ARTIFACTORY_SERVER',
     spec: '''{
